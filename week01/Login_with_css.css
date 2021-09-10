@@ -1,0 +1,30 @@
+* {
+    font-family: 'Hahmlet', serif;
+}
+
+
+.login-title {
+    background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
+    color: white;
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    /*text-align: center;*/
+    /*padding-top: 40px;*/
+
+    /*현업에서는 플렉스를 사용한다. (중요) */
+    display: flex;
+    flex-direction: column;
+    /*위 아래에 대해서 센터로 정렬*/
+    justify-content: center;
+    /*수직인 방향에 대한 정렬*/
+    align-items: center;
+}
+
+.wrap {
+    width: 300px;
+    /*위아래 10px, 좌우 auto, 위아래로는 auto가 안된다.*/
+    margin: 10px auto;
+}
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- . 은 클래스 -->
+    <style>
+        .blue-font {
+            color: blue;
+        }
+
+        #red-font {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<!-- p태그, div태그 는 한 줄을 차지 한다. -->
+
+<h1>로그인 페이지</h1>
+ID : <input type="text">
+<br/>
+<!-- display가 inline 블럭이라면, 한 줄을 차지하지 않는다. -->
+PW : <input type="password">
+<br/>
+<button type="button">로그인하기</button>
+
+
+<h1 class="blue-font">로그인 페이지</h1>
+<p class="blue-font">
+    ID : <input type="text">
+</p>
+<!-- id 태그는 전체 중 하나만!! -->
+<p id="red-font">
+    ID : <input type="text">
+</p>
+<p class="blue-font">
+    PW : <input type="password">
+</p>
+
+<button>로그인하기</button>
+</body>
+</html>
