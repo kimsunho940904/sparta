@@ -1,0 +1,69 @@
+<!Doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery+Ajax의 조합을 연습하자!</title>
+
+    <!-- jQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        div.question-box {
+            margin: 10px 0 20px 0;
+        }
+
+        .danger {
+            color: red;
+        }
+    </style>
+
+    <script>
+        function showMiseInfo() {
+
+            const miseInfo = $('#mise-info');
+            miseInfo.empty();
+
+            $.ajax({
+                type: "GET",
+                url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+                data: {},
+                success: function (response) {
+                    const rows = response['RealtimeCityAir']['row'];
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const name = row['MSRSTE_NM'];
+                        const pm10 = row['PM10'];
+                        let tempHtml;
+
+                        if (pm10 > 40) {
+                            tempHtml = `<li class="danger">${name} : ${pm10}</li>`;
+                        } else {
+                            tempHtml = `<li>${name} : ${pm10}</li>`;
+                        }
+
+                        miseInfo.append(tempHtml);
+                    }
+                },
+            })
+        }
+    </script>
+
+</head>
+
+<body>
+<h1>jQuery+Ajax의 조합을 연습하자!</h1>
+
+<hr/>
+
+<div class="question-box">
+    <h2> 서울시 OpenAPI(실시간 대기환경 정보)를 이용하기</h2>
+    <p>모든 관측소(MSRSTE_NM)의 미세먼지 수치(PM10)를 표기해주세요</p>
+    <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
+    <button onclick="showMiseInfo()">업데이트</button>
+    <ul id="mise-info">
+    </ul>
+</div>
+</body>
+
+</html>
