@@ -36,7 +36,7 @@
                         const pm10 = row['PM10'];
                         let tempHtml;
 
-                        if (pm10 > 40) {
+                        if (pm10 > 10) {
                             tempHtml = `<li class="danger">${name} : ${pm10}</li>`;
                         } else {
                             tempHtml = `<li>${name} : ${pm10}</li>`;

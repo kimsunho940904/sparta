@@ -58,55 +58,65 @@
         }
     </style>
 
-    <script>
-        function button1_click() {
-            alert("주문이 완료되었습니다.");
+    <script type="text/javascript">
+        function checkForm() {
+            var name = order.name.value;
+            var address = order.address.value;
+            var tel = order.tel.value;
+
+            if (!name) {
+                alert("이름을 입력하세요.");
+            }
+            if (!address) {
+                alert("주소를 입력하세요.");
+            }
+            if (!tel) {
+                alert("연락처를 입력하세요.");
+            } else if (name && address && tel) {
+                alert("주문이 완료되었습니다.");
+            }
         }
     </script>
 </head>
 <body>
 <div class="wrap">
-
     <div class="form-post post-box">
-        <form>
+        <div class="form-group">
+            <img class="card-img-top"
+                 src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                 alt="Card image cap">
+        </div>
+        <div class="title">
+            상품제목<small style="font-size: 15px;">가격 : 1,000원 / 개</small>
+        </div>
+        <div>
+            이 상품은, 가짜입니다. 가짜 상품을 구매 시 1+1 입니다!!!!<br>
+            가짜인 상품 이지만, 진짜 같은 상품. 당신은 이 상품을 구매할 수 있습니다.<br>
+            이 상품을 구매해서 1,000,000원에 다른사람에게 판매해도 좋습니다.
+        </div>
+        <p class="title">주문하기</p>
+        <form name="order" method="post">
             <div class="form-group">
-                <img class="card-img-top"
-                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                     alt="Card image cap">
+                주문자 성함 : <input type="text" id="name" placeholder="name">
             </div>
-            <div class="title">
-                상품제목<small style="font-size: 15px;">가격 : 1,000원 / 개</small>
-            </div>
-            <div>
-                이 상품은, 가짜입니다. 가짜 상품을 구매 시 1+1 입니다!!!!<br>
-                가짜인 상품 이지만, 진짜 같은 상품. 당신은 이 상품을 구매할 수 있습니다.<br>
-                이 상품을 구매해서 1,000,000원에 다른사람에게 판매해도 좋습니다.
-            </div>
-            <div class="title">
-                주문하기
-            </div>
-
-
             <div class="form-group">
-                <div>
-                    주문자 성함 : <input type="text">
-                </div>
-                <div>
-                    수량 : <select>
+                수량 :
+                <select>
                     <option>1</option>
                 </select>
-                </div>
-                <div>
-                    주소 : <input type="text">
-                </div>
-                <div>
-                    연락처 : <input type="tel">
-                </div>
+            </div>
+            <div class="form-group">
+                주소 : <input type="text" id="address" placeholder="address">
+            </div>
+            <div class="form-group">
+                연락처 : <input type="tel" id='tel' placeholder="010-xxxx-xxxx">
+            </div>
+
+            <div class="button-wrapper">
+                <button type="button" class="btn btn-default" onclick="checkForm()">주문하기</button>
             </div>
         </form>
-        <div class="button-wrapper">
-            <button type="button" id="button1" class="btn btn-default" onclick="button1_click()">주문하기</button>
-        </div>
+
     </div>
 </div>
 

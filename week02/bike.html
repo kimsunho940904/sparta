@@ -32,44 +32,44 @@
 
         $(document).ready(function () {
             showBikeInfo();
-        });
 
-        function showBikeInfo() {
-            $.ajax({
-                type: "GET",
-                url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99",
-                data: {},
-                success: function (response) {
-                    const rows = response['rentBikeStatus']['row']
-                    for (let i = 0; i < rows.length; i++) {
-                        const row = rows[i];
-                        const rackTotCnt = row['rackTotCnt'];
-                        const stationName = row['stationName'];
-                        const parkingBikeTotCnt = row['parkingBikeTotCnt'];
-                        let tempHtml;
 
-                        if (parkingBikeTotCnt > 5) {
-                            tempHtml = `<tr class="danger">
+            function showBikeInfo() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99",
+                    data: {},
+                    success: function (response) {
+                        const rows = response['rentBikeStatus']['row']
+                        for (let i = 0; i < rows.length; i++) {
+                            const row = rows[i];
+                            const rackTotCnt = row['rackTotCnt'];
+                            const stationName = row['stationName'];
+                            const parkingBikeTotCnt = row['parkingBikeTotCnt'];
+                            let tempHtml;
+
+                            if (parkingBikeTotCnt > 5) {
+                                tempHtml = `<tr class="danger">
                                             <td>${stationName}</td>
                                             <td>${rackTotCnt}</td>
                                             <td>${parkingBikeTotCnt}</td>
                                            </tr>`;
 
-                        } else {
-                            tempHtml = `<tr>
+                            } else {
+                                tempHtml = `<tr>
                                             <td>${stationName}</td>
                                             <td>${rackTotCnt}</td>
                                             <td>${parkingBikeTotCnt}</td>
                                            </tr>`;
 
+                            }
+
+                            $('#bike-info').append(tempHtml);
                         }
-
-                        $('#bike-info').append(tempHtml);
-                    }
-                },
-            });
-        }
-
+                    },
+                });
+            }
+        });
     </script>
 
 </head>
