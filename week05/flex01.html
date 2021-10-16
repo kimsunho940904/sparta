@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Tutorial01</title>
+    <style>
+        .flex-contiainer {
+            padding: 20px;
+            background-color: skyblue;
+            height: 500px;
+            display: flex; /* flex container 역할 시작 */
+            flex-direction: row; /* 직계 자손(flex-item) 정렬 방향 */
+            justify-content: center; /* flex-direction 방향에 대한 정렬 */
+            align-items: center; /* flex-direction 수직방향에 대한 정렬 */
+        }
+
+        .flex-item {
+            flex-grow: 1; /* 해당 flex-item이 차지하는 비율 */
+            padding: 20px;
+            margin: 10px;
+            background-color: bisque;
+            /*width: 300px;*/
+            /*height: 300px;*/
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex-contiainer">
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+</div>
+
+<div class="flex-contiainer">
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+</div>
+
+</body>
+</html>

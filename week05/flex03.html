@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--  가로폭을 디바이스의 가로폭에 맞추고 초기 화면 배율을 100%로 설정  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flex Tutorial03</title>
+    <style>
+        html, body {
+            margin: 0; /* 화면 외곽에 여백 없애기 꽉 채우기 */
+        }
+
+        nav {
+            background-color: skyblue;
+            height: 60px;
+        }
+
+        section {
+            background-color: bisque;
+            height: calc(100vh - 60px); /* 남은 여백만큼 높이 주기 */
+            display: flex; /* flex-container */
+            flex-direction: row; /* flex-item을 row로 정렬 */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #dbb195;
+        }
+
+        article {
+            width: calc(100vw - 200px); /* 나머지를 폭으로 주기 */
+            background-color: #9696e2;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            overflow: auto; /* 넘치면 알아서 스크롤을 만들어줌 */
+            justify-content: space-evenly; /* 적절히 공간을 배치 */
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            background-color: #69e9ee;
+            margin: 10px;
+        }
+
+        /* CSS는 위에서 아래로 적용되기 때문에 아래에 넣어야 기존의 CSS를 덮어씌움 */
+        /* width가 650px이하인 경우에 적용 */
+        @media (max-width: 650px) {
+            aside {
+                display: none; /* 화면에서 숨기기 */
+            }
+
+            article {
+                width: 100vw; /* calc(100vw - 200px)을 덮어씌움 */
+            }
+
+            .card {
+                width: calc(100% - 40px); /* %는 부모크기 기준 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>nav</nav>
+<section>
+    <aside>aside</aside>
+    <article>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+        <div class="card">card</div>
+    </article>
+</section>
+
+</body>
+</html>

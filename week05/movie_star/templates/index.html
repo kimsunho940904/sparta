@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>마이 페이보릿 무비스타 | 프론트-백엔드 연결 마지막 예제!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .star-list {
+            width: 500px;
+            margin: 20px auto 0 auto;
+        }
+
+        .star-name {
+            display: inline-block;
+        }
+
+        .star-name:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            margin-bottom: 15px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // index.html 로드가 완료되면 자동으로 showStar() 함수를 호출합니다.
+            showStar();
+        });
+
+        function showStar() {
+            //더미 데이터 지워주기.
+            $('#star-box').empty();
+            $.ajax({
+                type: 'GET',
+                url: '/api/list',
+                data: {},
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        // 1. 리스트를 가져온 후
+                        const stars_list = response['stars_list'];
+                        // console.log(stars_list);
+
+                        // 2. 반복문 돌기
+                        for (let i = 0; i < stars_list.length; i++) {
+                            const star = stars_list[i];
+                            // console.log(star);
+                            // 출력해주기.
+                            const tempHtml = `<div class="card">
+                                                <div class="card-content">
+                                                    <div class="media">
+                                                        <div class="media-left">
+                                                            <figure class="image is-48x48">
+                                                                <img src="${star['img_url']}" alt="Placeholder image">
+                                                            </figure>
+                                                        </div>
+                                                        <div class="media-content">
+                                                            <a href="${star['url']}" target="_blank" class="star-name title is-4">${star['name']} (좋아요: ${star['like']})</a>
+                                                            <p class="subtitle is-6">${star['recent']}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <footer class="card-footer">
+                                                    <a href="#" onclick="likeStar('${star['name']}')" class="card-footer-item has-text-info">
+                                                        위로!
+                                                        <span class="icon">
+                                                      <svg class="svg-inline--fa fa-thumbs-up fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="thumbs-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"></path></svg><!-- <i class="fas fa-thumbs-up"></i> -->
+                                                    </span>
+                                                    </a>
+                                                    <a href="#" onclick="deleteStar('${star['name']}')" class="card-footer-item has-text-danger">
+                                                        삭제
+                                                        <span class="icon">
+                                                      <svg class="svg-inline--fa fa-ban fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg><!-- <i class="fas fa-ban"></i> -->
+                                                    </span>
+                                                    </a>
+                                                </footer>
+                                            </div>`;
+                            $('#star-box').append(tempHtml); //star-box 안에 tempHtml를 넣어준다. 그러면 출력!
+                        }
+                    }
+                }
+            });
+        }
+
+        function likeStar(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {
+                    "name_give": name
+
+                },
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        const msg = response['msg'];
+                        alert(msg);
+                        //페이지 새로고침
+                        // location.reload();
+                        showStar();
+
+                    }
+                }
+            });
+        }
+
+        function deleteStar(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/delete',
+                data: {
+                    //key value를 서버에 전달.
+                    'name_give': name
+                },
+                success: function (response) {
+                    if (response['result'] === 'success') {
+                        let msg = response['msg'];
+                        alert(msg)
+                        // location.reload();
+                        showStar();
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<section class="hero is-warning">
+    <div class="hero-body">
+        <div class="container center">
+            <h1 class="title">
+                마이 페이보릿 무비스타😆
+            </h1>
+            <h2 class="subtitle">
+                순위를 매겨봅시다
+            </h2>
+        </div>
+    </div>
+</section>
+<div class="star-list" id="star-box">
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img
+                                src="https://search.pstatic.net/common/?src=https%3A%2F%2Fssl.pstatic.net%2Fsstatic%2Fpeople%2Fportrait%2F201807%2F20180731143610623-6213324.jpg&type=u120_150&quality=95"
+                                alt="Placeholder image"
+                        />
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <a href="#" target="_blank" class="star-name title is-4">김다미 (좋아요: 3)</a>
+                    <p class="subtitle is-6">안녕, 나의 소울메이트(가제)</p>
+                </div>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a href="#" onclick="likeStar('김다미')" class="card-footer-item has-text-info">
+                위로!
+                <span class="icon">
+              <i class="fas fa-thumbs-up"></i>
+            </span>
+            </a>
+            <a href="#" onclick="deleteStar('김다미')" class="card-footer-item has-text-danger">
+                삭제
+                <span class="icon">
+              <i class="fas fa-ban"></i>
+            </span>
+            </a>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

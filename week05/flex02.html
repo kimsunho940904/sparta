@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Tutorial02</title>
+    <style>
+        html, body {
+            margin: 0; /* 화면 외곽에 여백 없애기 꽉 채우기 */
+        }
+
+        nav {
+            background-color: skyblue;
+            height: 60px;
+        }
+
+        section {
+            background-color: bisque;
+            height: calc(100vh - 60px); /* 남은 여백만큼 높이 주기 */
+            display: flex; /* flex-container */
+            flex-direction: row; /* flex-item을 row로 정렬 */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #dbb195;
+        }
+
+        article {
+            width: calc(100vw - 200px); /* 나머지 여백을 폭으로 주기 */
+            background-color: #9696e2;
+        }
+    </style>
+</head>
+<body>
+
+<nav>nav</nav>
+<section>
+
+    <aside>aside</aside>
+    <article>article</article>
+
+</section>
+
+</body>
+</html>
