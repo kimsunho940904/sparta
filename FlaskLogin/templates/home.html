@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+<!-- content -->
+{% block content %}
+
+<div class="header">
+    <h3>Welcome ⌜{{ user['nick'] }}⌟</h3>
+</div>
+<div class="body">
+    <h4>👮‍♂ 이 페이지는 로그인이 필요한 페이지입니다.</h4>
+    <h6>(JWT token이 10초 뒤 만료됩니다)</h6>
+</div>
+<div class="footer">
+    <!-- Sign In -->
+    <button type="button" class="btn btn-danger sign-out" onclick="signOut()">로그아웃</button>
+</div>
+{% endblock %}
+
+<!-- style -->
+{% block style %}
+<style>
+    .header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .body {
+        margin: 32px 0;
+        text-align: center;
+    }
+
+    .sign-out {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .footer {
+        text-align: right;
+    }
+
+</style>
+{% endblock %}
+
+<!-- script -->
+{% block script %}
+<script>
+    function signOut() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/logout',
+            success: function(res) {
+                if (res['result'] === 'success') {
+                    alert(res['msg'])
+                    location.href = '/login'
+                }
+            }
+        })
+    }
+
+</script>
+{% endblock %}

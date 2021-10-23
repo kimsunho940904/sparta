@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+<!-- content -->
+{% block content %}
+<h1 class="header">로그인 페이지</h1>
+<div class="body">
+    <!-- ID -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text label">ID</span>
+        </div>
+        <input type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요" aria-label="id"
+               aria-describedby="id">
+    </div>
+    <!-- PW -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text label">PW</span>
+        </div>
+        <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요" aria-label="pw"
+               aria-describedby="pw">
+    </div>
+</div>
+<div class="footer">
+    <!-- Sign In -->
+    <button class="btn btn-primary sign-in" onclick="login()">로그인</button>
+
+    <!-- Sign Up -->
+    <a class="sign-up" href="/register">회원가입하러 가기</a>
+</div>
+{% endblock %}
+
+<!-- style -->
+{% block style %}
+<style>
+    .header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .body {
+        margin: 32px 0;
+    }
+
+    .sign-in {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .footer {
+        text-align: right;
+    }
+
+    .label {
+        width: 50px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+<!-- script -->
+{% block script %}
+<script>
+    function login() {
+        let id = $('#id').val()
+        let pw = $('#pw').val()
+
+        $.ajax({
+            type: "POST",
+            url: "/api/login",
+            data: {id_give: id, pw_give: pw},
+            success: function (response) {
+                if (response['result'] === 'success') {
+                    alert(response['msg'])
+                    location.href = '/'
+                } else {
+                    // 로그인이 안되면 에러메시지를 띄웁니다.
+                    alert(response['msg'])
+                }
+            }
+        })
+    }
+</script>
+{% endblock %}
