@@ -56,8 +56,11 @@
             height: 500px;
             background-color: white;
             margin: 10px;
-            text-align: center;
+            /*text-align: center;*/
             /*line-height: 350px;*/
+        }
+        h2{
+            padding-left: 20px;
         }
 
         /* CSS는 위에서 아래로 적용되기 때문에 아래에 넣어야 기존의 CSS를 덮어씌움 */
@@ -74,6 +77,19 @@
             .card {
                 width: calc(100% - 40px); /* %는 부모크기 기준 */
             }
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            border-radius: 70%;
+            overflow: hidden;
+        }
+
+        .profile {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -98,93 +114,35 @@
 </nav>
 
 
-<section>
-    <article>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-fluid rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">title</h5>
-                <p class="card-image"><img src="images/sample.jpg" class="img-rounded" alt="Sample" width="100%"
-                                           height="100%">
-                </p>
-                <div class="card-footer">
-                    footer
-                </div>
-            </div>
-        </div>
-    </article>
-</section>
-
-<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">사진제목</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <img class="card-img-top rounded img-fluid" src="images/sample.jpg">
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
+<div class="container" align="center">
+    <div class="box" style="background: #BDBDBD;">
+        <img class="profile" src="images/sample.jpg">
     </div>
+
+    <div class="card" align="left">
+        <h2>introduce</h2>
+        <ul>
+            <li> 안녕하세요. 백엔드 개발자 취업을 희망하는 김선호 입니다.</li>
+            <li>끝까지 포기하지 않기 위해 1일 1커밋 운동과 블로그 운영을 하고 있습니다.</li>
+        </ul>
+        <hr>
+        <h2>Skills</h2>
+        <ul>
+            <li>Java</li>
+            <li>Oracle,MySQL</li>
+            <li>JSP,Thymeleaf</li>
+            <li>Spring,JPA</li>
+        </ul>
+        <hr>
+        <h2>Contact & Channel</h2>
+        <ul>
+            <li>Email | hkkbc123@gmail.com</li>
+            <li>Github | github.com/kimsunho940904</li>
+        </ul>
+
+    </div>
+
+
 </div>
-
-
 </body>
 </html>
